@@ -1,0 +1,42 @@
+body {
+    height: 98vh; /*высот экрана*/
+    background-color: rgb(208, 233, 233);
+    display: flex; /*гибкий*/
+}
+
+.container {
+    width: 1000px;
+    height: 500px;
+    margin: auto;
+    display: flex;
+}
+
+.scoreboard {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(41, 70, 70);
+    margin: auto 75px auto 75px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    color: rgb(208, 233, 233);
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.field {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(41, 70, 70);
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.square {
+    background-color: rgb(255, 255, 255);
+    /*border: 5px solid black;*/
+    border-radius: 10px;
+}
+
