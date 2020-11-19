@@ -18,7 +18,9 @@ body {
     margin: auto 75px auto 75px;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
     color: rgb(208, 233, 233);
-    font-size: 100px;
+    font-size: 85px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .field {

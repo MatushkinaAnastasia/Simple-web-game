@@ -1,24 +1,47 @@
 const field = document.getElementById("field");
-const scoreboard = document.getElementById("scoreboard");
+const score = document.getElementById("score");
+const timer = document.getElementById("timer");
 
 let n = 2;
-let alpha = 1;
-next();
+let alpha = 500;
+
+let timerId;
+let time;
+
+start();
+
+function start() {
+    clearInterval(timerId);
+    time = 60 * 1000;
+    timerId = setInterval(function() {
+        timer.innerHTML = Math.round(time / 1000);
+        if (time <= 0) {
+            getFailed();
+        }
+        time -= 100;
+    }, 100);
+
+    n = 2;
+    alpha = 500;
+
+    next();
+}
+
 function next() {
-    scoreboard.innerHTML = n - 1;
+    score.innerHTML = n - 1;
     field.innerHTML = "";
     
     const n2 = n*n;
     const size = 492 / n;
     const margin = Math.max(Math.floor(size / 30), 1);
     const realSize = size - margin;
- /*   console.log("size = " + size);
-    console.log("margin = " + margin);
-    console.log("realSize = " + realSize);
-    console.log("492 - (realSize + margin) * n = " + (492 - (realSize + margin) * n));
-*/
 
-    console.log ("alpha = " + alpha);
+    if (alpha === 1000) {
+        alert("WIN");
+        start();
+        return;
+    }
+
     const r = randomInteger(0, 255);
     const g = randomInteger(0, 255);
     const b = randomInteger(0, 255);
@@ -36,8 +59,8 @@ function next() {
         field.appendChild(elem);
         elem.onclick = () => getFailed();
     }
-    alpha = alpha - 0.01;
-    color = "rgb(" + changeInt(r, 700 / n) + ", " + g + ", " + b + ", " + alpha + ")";
+    color = "rgb(" + r + ", " + g + ", " + b + ", " + (alpha / 1000) + ")";
+    alpha = alpha + 25;
     const el = document.getElementById(randomInteger(0, n2 - 1));
     el.style.backgroundColor = color;
     el.onclick = () => next();
@@ -45,17 +68,10 @@ function next() {
 }
 
 function getFailed () {
-    alert("WRONG!");
-    n = 2;
-    next();
-    
+    alert("LOSE!!!!");
+    start();
 }
  
-function changeInt(int, delta) {
-    if (int + delta > 255) return int - delta;
-    return int + delta;
-}
-
 function randomInteger(min, max) {
     // случайное число от min до (max+1)
     let rand = min + Math.random() * (max + 1 - min);
